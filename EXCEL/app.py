@@ -20,3 +20,15 @@ df_participants = pd.read_excel(excel_file,
                                 usecols='F:G',
                                 header=3)
 df_participants.dropna(inplace=True)
+
+department = df['Department'].unique().tolist()
+ages = df['Age'].unique().tolist()
+
+age_selection = st.slider('Age:',
+                        min_value= min(ages),
+                        max_value= max(ages),
+                        value=(min(ages),max(ages)))
+
+department_selection = st.multiselect('Department:',
+                                    department,
+                                    default=department)
