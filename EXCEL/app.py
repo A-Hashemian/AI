@@ -36,3 +36,8 @@ department_selection = st.multiselect('Department:',
 mask = (df['Age'].between(*age_selection)) & (df['Department'].isin(department_selection))
 number_of_result = df[mask].shape[0]
 st.markdown(f'*Available Results: {number_of_result}*')
+
+# --- GROUP DATAFRAME AFTER SELECTION
+df_grouped = df[mask].groupby(by=['Rating']).count()[['Age']]
+df_grouped = df_grouped.rename(columns={'Age': 'Votes'})
+df_grouped = df_grouped.reset_index()
